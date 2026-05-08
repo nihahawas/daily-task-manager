@@ -15,7 +15,12 @@ Adaptive Dark Mode: Seamless transition between light and dark themes.
 
 ## 📸 Screenshots
 
+### Light View
+
 <img width="723" height="870" alt="image" src="https://github.com/user-attachments/assets/9305c5a4-254e-4066-afc4-1351774d37e8" />
+
+### Dark View
+
 <img width="983" height="917" alt="image" src="https://github.com/user-attachments/assets/5284ea3f-8b19-4d6c-ada1-0e0366d75862" />
 
 
@@ -41,19 +46,6 @@ Adaptive Dark Mode: Seamless transition between light and dark themes.
 *   **Storage:** Web Storage API
 
 ---
-
-## 📂 Project Structure
-
-```text
-Daily-Task-Manager/
-│
-├── index.html    # Core structure of the application
-├── style.css     # Custom styling and responsive design
-├── script.js     # Task management logic and interactivity
-└── README.md     # Project documentation
-
----
-
 
 
 ## 📂 Installation
