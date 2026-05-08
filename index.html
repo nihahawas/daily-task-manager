@@ -1,247 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Task Manager Pro</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Task Manager Pro</title>
 
-<style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 40px 0;
-  display: flex;
-  justify-content: center;
-  background: #f4f6f9;
-  transition: 0.3s;
-}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px 0;
+            display: flex;
+            justify-content: center;
+            background: #f4f6f9;
+            transition: 0.3s;
+        }
 
-.dark {
-  background: #1a202c;
-  color: white;
-}
+        .dark {
+            background: #1a202c;
+            color: white;
+        }
 
-.container {
-  background: white;
-  width: 400px;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  transition: 0.3s;
-}
+        .container {
+            background: white;
+            width: 420px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transition: 0.3s;
+        }
 
-.dark .container {
-  background: #2d3748;
-}
+        .dark .container {
+            background: #2d3748;
+        }
 
-h1 {
-  text-align: center;
-  margin-bottom: 10px;
-}
+        /* Header Styling from Task Prioritizer */
+        .header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
 
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  margin-bottom: 15px;
-}
+        .main-title {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            background: linear-gradient(90deg, #1d24ab, #805ad5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-button {
-  cursor: pointer;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 6px;
-}
+        .tagline {
+            font-size: 13px;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            color: #718096;
+        }
 
-.toggle-btn {
-  background: #1d24ab;
-  color: white;
-}
+        .dark .tagline {
+            color: #cbd5e0;
+        }
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
 
-input, select {
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
+        button {
+            cursor: pointer;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: 0.2s;
+        }
 
-.add-btn {
-  background: #1d24ab;
-  color: white;
-}
+        .toggle-btn {
+            background: #1d24ab;
+            color: white;
+        }
 
-.filters {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-}
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
 
-.filter-btn {
-  background: #edf2f7;
-}
+        input, select {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
 
-.dark .filter-btn {
-  background: #4a5568;
-  color: white;
-}
+        .add-btn {
+            background: #1d24ab;
+            color: white;
+            font-weight: bold;
+        }
 
-.task {
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-}
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
 
-.high { background: #fed7d7; }
-.medium { background: #feebc8; }
-.low { background: #c6f6d5; }
+        .filter-btn {
+            background: #edf2f7;
+        }
 
-.dark .high { background: #f19393; }
-.dark .medium { background: #e68ded; }
-.dark .low { background: #8ceec0; }
+        .dark .filter-btn {
+            background: #4a5568;
+            color: white;
+        }
 
-.task-top {
-  display: flex;
-  justify-content: space-between;
-}
+        /* Enhanced Task Layout */
+        .task {
+            margin-top: 10px;
+            padding: 12px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            font-size: 14px;
+            transition: 0.2s ease-in-out;
+        }
 
-.completed {
-  text-decoration: line-through;
-  opacity: 0.6;
-}
+        .task:hover {
+            transform: scale(1.02);
+        }
 
-.actions button {
-  margin-left: 5px;
-  font-size: 12px;
-}
-</style>
+        /* Priority Colors (Original Colors + Left Border Design) */
+        .high { background: #fed7d7; border-left: 5px solid #e53e3e; }
+        .medium { background: #feebc8; border-left: 5px solid #dd6b20; }
+        .low { background: #c6f6d5; border-left: 5px solid #38a169; }
+
+        .dark .high { background: #f19393; }
+        .dark .medium { background: #e68ded; }
+        .dark .low { background: #8ceec0; }
+
+        .task-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .actions button {
+            margin-left: 5px;
+            font-size: 12px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .dark .actions button {
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        small {
+            margin-top: 4px;
+            color: #4a5568;
+        }
+        .dark small { color: #edf2f7; }
+    </style>
 </head>
-
 <body>
 
 <div class="container">
-  <h1>Smart Task Manager</h1>
+    <div class="header">
+        <h1 class="main-title">Smart Task Manager</h1>
+        <p class="tagline">Organize. Prioritize. Achieve.</p>
+    </div>
 
+    <div class="top-bar">
+        <span id="counter"></span>
+        <button class="toggle-btn" onclick="toggleDark()">Dark Mode</button>
+    </div>
 
+    <form id="taskForm">
+        <input type="text" id="taskInput" placeholder="Enter task..." required>
+        <input type="date" id="deadline"> 
+        <select id="prioritySelect" required>
+            <option value="">Priority</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+        </select>
+        <button class="add-btn" type="submit">Add Task</button>
+    </form>
 
-  <div class="top-bar">
-    <span id="counter"></span>
-    <button class="toggle-btn" onclick="toggleDark()">Dark Mode</button>
-  </div>
+    <div class="filters">
+        <button class="filter-btn" onclick="setFilter('all')">All</button>
+        <button class="filter-btn" onclick="setFilter('active')">Active</button>
+        <button class="filter-btn" onclick="setFilter('completed')">Completed</button>
+    </div>
 
-  <form id="taskForm">
-    <input type="text" id="taskInput" placeholder="Enter task..." required>
-    <input type="date" id="deadline">
-    <select id="prioritySelect" required>
-      <option value="">Priority</option>
-      <option value="high">High</option>
-      <option value="medium">Medium</option>
-      <option value="low">Low</option>
-    </select>
-    <button class="add-btn" type="submit">Add Task</button>
-  </form>
-
-  <div class="filters">
-    <button class="filter-btn" onclick="setFilter('all')">All</button>
-    <button class="filter-btn" onclick="setFilter('active')">Active</button>
-    <button class="filter-btn" onclick="setFilter('completed')">Completed</button>
-  </div>
-
-  <div id="taskList"></div>
+    <div id="taskList"></div>
 </div>
 
 <script>
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-let currentFilter = "all";
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    let currentFilter = "all";
 
-const form = document.getElementById("taskForm");
-const input = document.getElementById("taskInput");
-const deadline = document.getElementById("deadline");
-Aconst priority = document.getElementById("prioritySelect");
-const list = document.getElementById("taskList");
-const counter = document.getElementById("counter");
+    const form = document.getElementById("taskForm");
+    const input = document.getElementById("taskInput");
+    const deadline = document.getElementById("deadline");
+    const priority = document.getElementById("prioritySelect");
+    const list = document.getElementById("taskList");
+    const counter = document.getElementById("counter");
 
-function saveTasks() {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-}
+    function saveTasks() {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
 
-function toggleDark() {
-  document.body.classList.toggle("dark");
-}
+    function toggleDark() {
+        document.body.classList.toggle("dark");
+    }
 
-function setFilter(filter) {
-  currentFilter = filter;
-  render();
-}
+    function setFilter(filter) {
+        currentFilter = filter;
+        render();
+    }
 
-function render() {
-  list.innerHTML = "";
+    function render() {
+        list.innerHTML = "";
 
-  let filtered = tasks.filter(task => {
-    if (currentFilter === "active") return !task.completed;
-    if (currentFilter === "completed") return task.completed;
-    return true;
-  });
+        // Update Counter
+        const remaining = tasks.filter(t => !t.completed).length;
+        counter.textContent = `${remaining} active task(s)`;
 
-  const remaining = tasks.filter(t => !t.completed).length;
-  counter.textContent = `${remaining} active task(s)`;
+        // Filter Tasks
+        let filteredTasks = tasks.filter(t => {
+            if (currentFilter === "active") return !t.completed;
+            if (currentFilter === "completed") return t.completed;
+            return true;
+        });
 
-  filtered.forEach((task, index) => {
-    const div = document.createElement("div");
-    div.className = `task ${task.priority}`;
-    if (task.completed) div.classList.add("completed");
+        filteredTasks.forEach((task) => {
+            const taskIndex = tasks.indexOf(task);
+            const taskEl = document.createElement("div");
+            taskEl.className = `task ${task.priority} ${task.completed ? 'completed' : ''}`;
+            
+            taskEl.innerHTML = `
+                <div class="task-top">
+                    <strong>${task.name}</strong>
+                    <div class="actions">
+                        <button onclick="toggle(${taskIndex})">${task.completed ? "Undo" : "Done"}</button>
+                        <button onclick="removeTask(${taskIndex})">Delete</button>
+                    </div>
+                </div>
+                ${task.deadline ? `<small>Deadline: ${task.deadline}</small>` : ""}
+            `;
+            list.appendChild(taskEl);
+        });
+    }
 
-    div.innerHTML = `
-      <div class="task-top">
-        <strong>${task.name}</strong>
-        <div class="actions">
-          <button onclick="toggle(${index})">${task.completed ? "Undo" : "Done"}</button>
-          <button onclick="removeTask(${index})">Delete</button>
-        </div>
-      </div>
-      ${task.deadline ? `<small>Deadline: ${task.deadline}</small>` : ""}
-    `;
+    function toggle(index) {
+        tasks[index].completed = !tasks[index].completed;
+        saveTasks();
+        render();
+    }
 
-    list.appendChild(div);
-  });
-}
+    function removeTask(index) {
+        tasks.splice(index, 1);
+        saveTasks();
+        render();
+    }
 
-function toggle(index) {
-  tasks[index].completed = !tasks[index].completed;
-  saveTasks();
-  render();
-}
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
 
-function removeTask(index) {
-  tasks.splice(index, 1);
-  saveTasks();
-  render();
-}
+        tasks.push({
+            name: input.value,
+            deadline: deadline.value,
+            priority: priority.value,
+            completed: false
+        });
 
-form.addEventListener("submit", function(e) {
-  e.preventDefault();
+        saveTasks();
+        form.reset();
+        render();
+    });
 
-  tasks.push({
-    name: input.value,
-    deadline: deadline.value,
-    priority: priority.value,
-    completed: false
-  });
-
-  saveTasks();
-  form.reset();
-  render();
-});
-
-render();
+    render();
 </script>
 
 </body>
