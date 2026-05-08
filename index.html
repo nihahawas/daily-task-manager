@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Task Manager Pro</title>
+    <title>Smart Task Manager</title>
 
     <style>
         body {
@@ -12,7 +12,7 @@
             padding: 40px 0;
             display: flex;
             justify-content: center;
-            background: #f4f6f9;
+            background: #f0f2f5;
             transition: 0.3s;
         }
 
@@ -24,89 +24,76 @@
         .container {
             background: white;
             width: 420px;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             transition: 0.3s;
         }
 
         .dark .container {
             background: #2d3748;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
 
-        /* Header Styling from Task Prioritizer */
-        .header {
+        h1 {
             text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .main-title {
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            background: linear-gradient(90deg, #1d24ab, #805ad5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .tagline {
-            font-size: 13px;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            color: #718096;
-        }
-
-        .dark .tagline {
-            color: #cbd5e0;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 20px;
         }
 
         .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
+            font-size: 14px;
             margin-bottom: 15px;
         }
 
         button {
             cursor: pointer;
             border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
+            border-radius: 8px;
             transition: 0.2s;
         }
 
         .toggle-btn {
             background: #1d24ab;
             color: white;
+            padding: 8px 15px;
         }
 
         form {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         input, select {
-            padding: 8px;
-            border-radius: 6px;
+            padding: 10px;
+            border-radius: 8px;
             border: 1px solid #ccc;
+            outline: none;
         }
 
         .add-btn {
             background: #1d24ab;
             color: white;
+            padding: 10px;
             font-weight: bold;
+            font-size: 15px;
         }
 
         .filters {
             display: flex;
             justify-content: space-between;
-            margin-top: 15px;
+            margin: 20px 0;
         }
 
         .filter-btn {
             background: #edf2f7;
+            padding: 6px 18px;
+            font-size: 13px;
         }
 
         .dark .filter-btn {
@@ -114,69 +101,74 @@
             color: white;
         }
 
-        /* Enhanced Task Layout */
+        /* Task Cards Layout */
         .task {
-            margin-top: 10px;
-            padding: 12px;
-            border-radius: 10px;
+            margin-top: 12px;
+            padding: 15px;
+            border-radius: 12px;
             display: flex;
             flex-direction: column;
-            font-size: 14px;
-            transition: 0.2s ease-in-out;
+            gap: 5px;
+            position: relative;
         }
 
-        .task:hover {
-            transform: scale(1.02);
-        }
-
-        /* Priority Colors (Original Colors + Left Border Design) */
-        .high { background: #fed7d7; border-left: 5px solid #e53e3e; }
-        .medium { background: #feebc8; border-left: 5px solid #dd6b20; }
-        .low { background: #c6f6d5; border-left: 5px solid #38a169; }
+        /* Priority Colors based on your images */
+        .high { background: #fed7d7; }
+        .medium { background: #feebc8; }
+        .low { background: #c6f6d5; }
 
         .dark .high { background: #f19393; }
         .dark .medium { background: #e68ded; }
-        .dark .low { background: #8ceec0; }
+        .dark .low { background: #71b394; }
 
         .task-top {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
         }
 
-        .completed {
-            text-decoration: line-through;
-            opacity: 0.6;
+        .task-title {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .deadline-text {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
         }
 
         .actions button {
-            margin-left: 5px;
+            padding: 5px 12px;
             font-size: 12px;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.7);
+            color: #333;
         }
-        
+
         .dark .actions button {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.2);
             color: white;
         }
 
-        small {
-            margin-top: 4px;
-            color: #4a5568;
+        .completed {
+            opacity: 0.5;
+            text-decoration: line-through;
         }
-        .dark small { color: #edf2f7; }
+        
+        .completed .task-title { text-decoration: line-through; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header">
-        <h1 class="main-title">Smart Task Manager</h1>
-        <p class="tagline">Organize. Prioritize. Achieve.</p>
-    </div>
+    <h1>Smart Task Manager</h1>
 
     <div class="top-bar">
-        <span id="counter"></span>
+        <span id="counter">0 active task(s)</span>
         <button class="toggle-btn" onclick="toggleDark()">Dark Mode</button>
     </div>
 
@@ -227,32 +219,32 @@
 
     function render() {
         list.innerHTML = "";
+        
+        const activeCount = tasks.filter(t => !t.completed).length;
+        counter.textContent = `${activeCount} active task(s)`;
 
-        // Update Counter
-        const remaining = tasks.filter(t => !t.completed).length;
-        counter.textContent = `${remaining} active task(s)`;
-
-        // Filter Tasks
-        let filteredTasks = tasks.filter(t => {
+        let filtered = tasks.filter(t => {
             if (currentFilter === "active") return !t.completed;
             if (currentFilter === "completed") return t.completed;
             return true;
         });
 
-        filteredTasks.forEach((task) => {
-            const taskIndex = tasks.indexOf(task);
+        filtered.forEach((task) => {
+            const realIndex = tasks.indexOf(task);
             const taskEl = document.createElement("div");
             taskEl.className = `task ${task.priority} ${task.completed ? 'completed' : ''}`;
             
             taskEl.innerHTML = `
                 <div class="task-top">
-                    <strong>${task.name}</strong>
+                    <div class="task-info">
+                        <div class="task-title">${task.name}</div>
+                        <div class="deadline-text">Deadline: ${task.deadline || 'No deadline'}</div>
+                    </div>
                     <div class="actions">
-                        <button onclick="toggle(${taskIndex})">${task.completed ? "Undo" : "Done"}</button>
-                        <button onclick="removeTask(${taskIndex})">Delete</button>
+                        <button onclick="toggle(${realIndex})">${task.completed ? "Undo" : "Done"}</button>
+                        <button onclick="removeTask(${realIndex})">Delete</button>
                     </div>
                 </div>
-                ${task.deadline ? `<small>Deadline: ${task.deadline}</small>` : ""}
             `;
             list.appendChild(taskEl);
         });
@@ -272,14 +264,12 @@
 
     form.addEventListener("submit", function(e) {
         e.preventDefault();
-
         tasks.push({
             name: input.value,
             deadline: deadline.value,
             priority: priority.value,
             completed: false
         });
-
         saveTasks();
         form.reset();
         render();
